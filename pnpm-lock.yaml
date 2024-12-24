@@ -27,13 +27,25 @@ importers:
   config/prettier:
     devDependencies:
       prettier:
-        specifier: ^3.3.3
+        specifier: ^3.2.5
         version: 3.3.3
       prettier-plugin-tailwindcss:
         specifier: ^0.5.13
         version: 0.5.14(prettier@3.3.3)
 
   config/typescript-config: {}
+
+  packages/auth:
+    devDependencies:
+      '@saas/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
+      '@saas/prettier':
+        specifier: workspace:*
+        version: link:../../config/prettier
+      '@saas/tsconfig':
+        specifier: workspace:*
+        version: link:../../config/typescript-config
 
 packages:
 
