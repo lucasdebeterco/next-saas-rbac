@@ -1,3 +1,3 @@
 export type User = {
-	role: 'ADMIN' | 'MEMBER'
+  role: 'ADMIN' | 'MEMBER'
 }
