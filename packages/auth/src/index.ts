@@ -8,11 +8,11 @@ import { z } from 'zod'
 
 import { User } from './models/user'
 import { permissions } from './permissions'
-import { billingSubject } from './subjects/billing.ts'
-import { inviteSubject } from './subjects/invite.ts'
-import { organizationSubject } from './subjects/organization.ts'
-import { projectSubject } from './subjects/project.ts'
-import { userSubject } from './subjects/user.ts'
+import { billingSubject } from './subjects/billing'
+import { inviteSubject } from './subjects/invite'
+import { organizationSubject } from './subjects/organization'
+import { projectSubject } from './subjects/project'
+import { userSubject } from './subjects/user'
 
 export * from './models/organization'
 export * from './models/project'
@@ -39,6 +39,7 @@ export function defineAbilityFor(user: User) {
   if (typeof permissions[user.role] !== 'function') {
     throw new Error(`Permissions for role ${user.role} not found.`)
   }
+
   permissions[user.role](user, builder)
 
   const ability = builder.build({
@@ -49,10 +50,3 @@ export function defineAbilityFor(user: User) {
 
   return ability
 }
-
-const { build, can, cannot } = new AbilityBuilder(createAppAbility)
-
-can('invite', 'User')
-cannot('delete', 'User')
-
-export const ability = build()
