@@ -1,15 +1,28 @@
-import { redirect } from 'next/navigation'
+import './globals.css'
 
-import { isAuthenticated } from '@/auth/auth'
+import type { Metadata } from 'next'
+import { ThemeProvider } from 'next-themes'
 
-export default function AppLayout({
+export const metadata: Metadata = {
+  title: 'Create Next App',
+}
+
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  if (!isAuthenticated()) {
-    redirect('/auth/sign-in')
-  }
-
-  return <>{children}</>
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  )
 }
