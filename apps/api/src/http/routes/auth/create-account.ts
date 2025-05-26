@@ -34,6 +34,7 @@ export async function createAccount(app: FastifyInstance) {
       }
 
       const [, domain] = email.split('@')
+
       const autoJoinOrganization = await prisma.organization.findFirst({
         where: {
           domain,
